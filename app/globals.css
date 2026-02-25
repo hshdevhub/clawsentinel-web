@@ -2,19 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  h1, h2 {
+    font-family: var(--font-display), system-ui, sans-serif;
+    letter-spacing: -0.03em;
+  }
+  section[id] {
+    scroll-margin-top: 3.5rem; /* 56px — navbar height */
+  }
+}
+
 :root {
   --background: #0d0d0d;
   --surface: #141414;
   --border: #1f1f1f;
 }
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
-html {
-  scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
 body {
   background-color: #0d0d0d;
@@ -23,33 +29,193 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+/* ── Scrollbar ─────────────────────────────────────────── */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: #111; }
+::-webkit-scrollbar-thumb { background: #2a2a2a; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #3a3a3a; }
+
+/* ── Selection ─────────────────────────────────────────── */
+::selection { background: rgba(59, 130, 246, 0.3); color: #f1f1f1; }
+
+/* ── Focus ─────────────────────────────────────────────── */
+:focus-visible { outline: 2px solid #3b82f6; outline-offset: 2px; }
+
+/* ════════════════════════════════════════════════════════
+   KEYFRAMES
+   ════════════════════════════════════════════════════════ */
+
+/* Glitch — fires every 7 s, looks intentional */
+@keyframes glitch-text {
+  0%,  80%, 100% { text-shadow: none; transform: skewX(0deg); }
+  82% { text-shadow: -3px 0 #3b82f6, 3px 0 #ff3b3b; transform: skewX(-2deg); }
+  84% { text-shadow: 3px 0 #22c55e, -3px 0 #ff3b3b; transform: skewX(2deg); }
+  86% { text-shadow: none; transform: skewX(0deg); }
+  88% { text-shadow: -2px 0 #3b82f6, 2px 0 rgba(255,59,59,0.5); transform: skewX(-1deg); }
+  90% { text-shadow: none; transform: skewX(0deg); }
 }
 
-::-webkit-scrollbar-track {
-  background: #141414;
+/* Cursor blink */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
 }
 
-::-webkit-scrollbar-thumb {
-  background: #1f1f1f;
-  border-radius: 3px;
+/* Fade-up enter */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #2f2f2f;
+/* Green pulse ring */
+@keyframes pulse-green {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.55); }
+  60%       { box-shadow: 0 0 0 5px rgba(34, 197, 94, 0); }
 }
 
-/* Selection color */
-::selection {
-  background-color: rgba(59, 130, 246, 0.3);
-  color: #f1f1f1;
+/* Red pulse ring */
+@keyframes pulse-red {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 59, 59, 0.5); opacity: 1; }
+  60%       { box-shadow: 0 0 0 5px rgba(255, 59, 59, 0); opacity: 0.65; }
 }
 
-/* Focus ring */
-:focus-visible {
-  outline: 2px solid #3b82f6;
-  outline-offset: 2px;
+/* Horizontal shimmer sweep — threat cards */
+@keyframes h-scan {
+  0%   { left: -35%; }
+  100% { left: 115%; }
+}
+
+/* Vertical scan line — hero terminal block */
+@keyframes v-scan {
+  0%   { top: -4px; }
+  100% { top: 100%; }
+}
+
+/* Stagger card enter */
+@keyframes card-in {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ════════════════════════════════════════════════════════
+   UTILITY CLASSES
+   ════════════════════════════════════════════════════════ */
+
+/* Hero dot-grid background */
+.dot-grid {
+  background-image:
+    radial-gradient(ellipse 80% 45% at 50% -10%, rgba(255, 59, 59, 0.07), transparent),
+    radial-gradient(circle, rgba(59, 130, 246, 0.07) 1px, transparent 1px);
+  background-size: 100% 100%, 28px 28px;
+}
+
+/* Glitch text */
+.glitch-text {
+  display: inline-block;
+  animation: glitch-text 7s ease-in-out infinite;
+}
+
+/* Cursor blink */
+.blink { animation: blink 1s step-end infinite; }
+
+/* Pulsing status dots */
+.pulse-green { animation: pulse-green 2.2s ease-in-out infinite; }
+.pulse-red   { animation: pulse-red 2.2s ease-in-out infinite; }
+
+/* Horizontal shimmer parent */
+.shimmer-parent {
+  position: relative;
+  overflow: hidden;
+}
+.shimmer-parent::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -35%;
+  width: 28%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 59, 59, 0.045), transparent);
+  animation: h-scan 5.5s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+.shimmer-parent > * { position: relative; z-index: 1; }
+
+/* Blue shimmer variant (terminal / feature cards) */
+.shimmer-blue::before {
+  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.055), transparent);
+  animation-duration: 4s;
+}
+
+/* Vertical scan line on terminal */
+.v-scan-parent {
+  position: relative;
+  overflow: hidden;
+}
+.v-scan-parent::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(transparent, rgba(59, 130, 246, 0.35), transparent);
+  animation: v-scan 4s linear infinite;
+  pointer-events: none;
+}
+
+/* Scroll-reveal base state */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+.reveal.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Card stagger (applied programmatically with animation-delay) */
+.card-stagger {
+  opacity: 0;
+  animation: card-in 0.55s ease forwards;
+}
+
+/* Hover glows */
+.hover-glow-red {
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.hover-glow-red:hover {
+  box-shadow: 0 0 0 1px rgba(255, 59, 59, 0.35),
+              0 8px 32px rgba(255, 59, 59, 0.12);
+  border-color: rgba(255, 59, 59, 0.45) !important;
+}
+
+.hover-glow-blue {
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.hover-glow-blue:hover {
+  box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.35),
+              0 8px 32px rgba(59, 130, 246, 0.12);
+  border-color: rgba(59, 130, 246, 0.45) !important;
+}
+
+/* Persistent Pro card glow */
+.pro-glow {
+  box-shadow:
+    0 0 0 1px rgba(59, 130, 246, 0.3),
+    0 8px 40px rgba(59, 130, 246, 0.14),
+    0 0 80px rgba(59, 130, 246, 0.05);
+}
+
+/* Install box blue glow */
+.install-glow {
+  box-shadow:
+    0 0 0 1px rgba(59, 130, 246, 0.2),
+    0 4px 24px rgba(59, 130, 246, 0.1);
+}
+
+/* CTA button glow */
+.cta-glow {
+  box-shadow: 0 0 24px rgba(59, 130, 246, 0.35);
+  transition: box-shadow 0.3s ease, background-color 0.2s ease;
+}
+.cta-glow:hover {
+  box-shadow: 0 0 36px rgba(59, 130, 246, 0.55);
 }

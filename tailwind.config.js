@@ -25,10 +25,14 @@ module.exports = {
         green: {
           DEFAULT: '#22c55e',
         },
+        orange: {
+          400: '#fb923c',
+        },
       },
       fontFamily: {
         sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
-        mono: ['var(--font-fira-code)', 'Menlo', 'monospace'],
+        display: ['var(--font-display)', 'system-ui', 'sans-serif'],
+        mono: ['var(--font-mono)', 'Menlo', 'monospace'],
       },
     },
   },

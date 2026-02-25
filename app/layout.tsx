@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Inter, Fira_Code } from 'next/font/google'
+import { Inter, Space_Grotesk, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
 
 const inter = Inter({
@@ -8,9 +8,15 @@ const inter = Inter({
   display: 'swap',
 })
 
-const firaCode = Fira_Code({
+const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
-  variable: '--font-fira-code',
+  variable: '--font-display',
+  display: 'swap',
+})
+
+const jetBrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  variable: '--font-mono',
   display: 'swap',
 })
 
@@ -43,13 +49,12 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://clawsentinel.sh'),
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${firaCode.variable}`}>
+    <html
+      lang="en"
+      className={`${inter.variable} ${spaceGrotesk.variable} ${jetBrainsMono.variable}`}
+    >
       <body className="font-sans bg-background text-text antialiased">
         {children}
       </body>
