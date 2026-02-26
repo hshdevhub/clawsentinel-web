@@ -1,20 +1,27 @@
-const GITHUB_URL = 'https://github.com/hshdevhub/clawsentinel'
-const SECURITY_URL = 'https://github.com/hshdevhub/clawsentinel/blob/main/SECURITY.md'
-const BILLING_URL = 'https://api.clawsentinel.dev/api/checkout'
-const DOCS_URL = 'https://github.com/hshdevhub/clawsentinel#readme'
+import Link from 'next/link'
 
-const links = [
-  { label: 'GitHub', href: GITHUB_URL },
-  { label: 'SECURITY.md', href: SECURITY_URL },
+const GITHUB_URL   = 'https://github.com/hshdevhub/clawsentinel'
+const SECURITY_URL = 'https://github.com/hshdevhub/clawsentinel/blob/main/SECURITY.md'
+const BILLING_URL  = 'https://billing.stripe.com'
+const DOCS_URL     = 'https://github.com/hshdevhub/clawsentinel#readme'
+
+const externalLinks = [
+  { label: 'GitHub',         href: GITHUB_URL },
+  { label: 'SECURITY.md',   href: SECURITY_URL },
   { label: 'Billing Portal', href: BILLING_URL },
   { label: 'Operator Guide', href: DOCS_URL },
+]
+
+const legalLinks = [
+  { label: 'Privacy Policy',   href: '/privacy' },
+  { label: 'Terms of Service', href: '/terms' },
 ]
 
 export default function Footer() {
   return (
     <footer className="border-t border-border py-12 px-4 sm:px-6">
       <div className="max-w-6xl mx-auto">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 mb-8">
+        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-8 mb-8">
           {/* Wordmark */}
           <div className="flex items-center gap-2.5">
             <span className="w-7 h-7 rounded bg-red flex items-center justify-center text-xs font-bold text-white font-mono leading-none">
@@ -29,19 +36,32 @@ export default function Footer() {
           </div>
 
           {/* Links */}
-          <nav className="flex flex-wrap gap-x-6 gap-y-2">
-            {links.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-xs text-text-muted hover:text-text transition-colors"
-              >
-                {link.label}
-              </a>
-            ))}
-          </nav>
+          <div className="flex flex-col gap-4">
+            <nav className="flex flex-wrap gap-x-6 gap-y-2">
+              {externalLinks.map((link) => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs text-text-muted hover:text-text transition-colors"
+                >
+                  {link.label}
+                </a>
+              ))}
+            </nav>
+            <nav className="flex flex-wrap gap-x-6 gap-y-2">
+              {legalLinks.map((link) => (
+                <Link
+                  key={link.label}
+                  href={link.href}
+                  className="text-xs text-text-muted hover:text-text transition-colors"
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </nav>
+          </div>
         </div>
 
         <div className="border-t border-border pt-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
