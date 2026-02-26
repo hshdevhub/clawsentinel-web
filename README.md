@@ -2,7 +2,7 @@
 
 **Marketing and documentation website for ClawSentinel.**
 
-Live at: [clawsentinel.sh](https://clawsentinel.sh)
+Live at: [clawsentinel.dev](https://clawsentinel.dev)
 
 ---
 

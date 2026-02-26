@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     title: 'ClawSentinel — Five Layers. One Install. Zero Trust.',
     description:
       'The complete security platform for OpenClaw. Blocks prompt injection, supply chain attacks, and credential theft.',
-    url: 'https://clawsentinel.sh',
+    url: 'https://clawsentinel.dev',
     siteName: 'ClawSentinel',
     type: 'website',
   },
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     description:
       'The complete security platform for OpenClaw. Blocks prompt injection, supply chain attacks, and credential theft.',
   },
-  metadataBase: new URL('https://clawsentinel.sh'),
+  metadataBase: new URL('https://clawsentinel.dev'),
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
