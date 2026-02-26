@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 
-const CHECKOUT_URL = 'https://clawsentinel-api.vercel.app/api/checkout'
+const CHECKOUT_URL = 'https://api.clawsentinel.dev/api/checkout'
 
 const freeModules = [
   'ClawGuard Proxy',

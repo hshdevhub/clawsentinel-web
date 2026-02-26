@@ -1,6 +1,6 @@
 const GITHUB_URL = 'https://github.com/hshdevhub/clawsentinel'
 const SECURITY_URL = 'https://github.com/hshdevhub/clawsentinel/blob/main/SECURITY.md'
-const BILLING_URL = 'https://clawsentinel-api.vercel.app/api/checkout'
+const BILLING_URL = 'https://api.clawsentinel.dev/api/checkout'
 const DOCS_URL = 'https://github.com/hshdevhub/clawsentinel#readme'
 
 const links = [

@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 
 const GITHUB_URL = 'https://github.com/hshdevhub/clawsentinel'
-const CHECKOUT_URL = 'https://clawsentinel-api.vercel.app/api/checkout'
+const CHECKOUT_URL = 'https://api.clawsentinel.dev/api/checkout'
 
 const navLinks = [
   { label: 'Features',     id: 'features'     },
